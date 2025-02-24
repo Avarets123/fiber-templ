@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiber template</title>
+</head>
+
+<body>
+    <p>{{.Count}} - количество пользователей!</p>
+
+    {{ if .IsAdmin }}
+    <h2>Вы админ</h2>
+    {{ else }}
+    <h2>Вы не админ</h2>
+    {{ end }}
+
+    {{ if lt .Count 10}}
+    <p>На сайте меньше 10 пользователей</p>
+    {{ else if gt .Count 9 }}
+    <p>На сайте 10 пользователей и более</p>
+    {{ end }}
+
+    {{ if and .IsAdmin .CanUse }}
+    <h2>Функционал доступен только админу</h2>
+    {{ end }}
+
+
+
+</body>
+
+</html>
