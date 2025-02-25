@@ -9,6 +9,10 @@ import (
 type handler struct {
 	router fiber.Router
 }
+type User struct {
+	Id   int
+	Name string
+}
 
 func ApplyHanlder(r fiber.Router) {
 
@@ -24,10 +28,19 @@ func ApplyHanlder(r fiber.Router) {
 }
 
 func (h *handler) home(c *fiber.Ctx) error {
+
+	users := []User{
+		{Id: 1, Name: "Vasya"},
+		{Id: 2, Name: "Andrey"},
+		{Id: 3, Name: "Sasha"},
+	}
+
+	names := []string{"Alex", "Tanya"}
+
 	data := struct {
-		Count           int
-		IsAdmin, CanUse bool
-	}{Count: 10, IsAdmin: true, CanUse: true}
+		Names []string
+		Users []User
+	}{Names: names, Users: users}
 
 	return c.Render("page", data)
 }

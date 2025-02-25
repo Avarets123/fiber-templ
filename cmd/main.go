@@ -5,6 +5,7 @@ import (
 	"fiber-templ/internal/home"
 	"fiber-templ/pkg/logger/zlogger"
 	"log"
+	"strings"
 	"time"
 
 	"github.com/gofiber/contrib/fiberzerolog"
@@ -42,6 +43,9 @@ func main() {
 func configureFiber(zlogger *zerolog.Logger) *fiber.App {
 
 	engine := html.New("./html", ".html")
+	engine.AddFuncMap(map[string]interface{}{
+		"ToUpper": strings.ToUpper,
+	})
 
 	app := fiber.New(fiber.Config{
 		ReadTimeout:  time.Second * 10,
