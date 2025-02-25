@@ -42,7 +42,7 @@ func (h *handler) home(c *fiber.Ctx) error {
 		Users []User
 	}{Names: names, Users: users}
 
-	return c.Render("page", data)
+	return c.Render("page2", data)
 }
 
 func (h *handler) error(c *fiber.Ctx) error {
