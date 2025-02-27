@@ -1,0 +1,12 @@
+package layout
+
+css HeaderCss() {
+	background: { "grey" };
+	text-align: {"center"};
+}
+
+templ Header() {
+	<div class={ HeaderCss() }>
+		{ children... }
+	</div>
+}

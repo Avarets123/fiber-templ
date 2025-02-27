@@ -1,0 +1,14 @@
+package views
+
+import "fiber-templ/views/components"
+import "fiber-templ/views/layout"
+
+templ Main() {
+	<main>
+		main
+		@layout.Header() {
+			@components.Title("Найди работу своей мечты")
+			@components.SubTitle("Простой поиск работы")
+		}
+	</main>
+}

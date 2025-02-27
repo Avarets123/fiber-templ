@@ -2,6 +2,8 @@ package home
 
 import (
 	"encoding/json"
+	"fiber-templ/pkg/templ"
+	"fiber-templ/views"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -29,20 +31,24 @@ func ApplyHanlder(r fiber.Router) {
 
 func (h *handler) home(c *fiber.Ctx) error {
 
-	users := []User{
-		{Id: 1, Name: "Vasya"},
-		{Id: 2, Name: "Andrey"},
-		{Id: 3, Name: "Sasha"},
-	}
+	// users := []User{
+	// 	{Id: 1, Name: "Vasya"},
+	// 	{Id: 2, Name: "Andrey"},
+	// 	{Id: 3, Name: "Sasha"},
+	// }
 
-	names := []string{"Alex", "Tanya"}
+	// names := []string{"Alex", "Tanya"}
 
-	data := struct {
-		Names []string
-		Users []User
-	}{Names: names, Users: users}
+	// data := struct {
+	// 	Names []string
+	// 	Users []User
+	// }{Names: names, Users: users}
 
-	return c.Render("page2", data)
+	// return c.Render("page2", data)
+
+	component := views.Main()
+
+	return templ.Render(c, component)
 }
 
 func (h *handler) error(c *fiber.Ctx) error {

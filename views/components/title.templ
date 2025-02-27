@@ -1,0 +1,13 @@
+package components
+
+css titleStyle() {
+	color: { "#FFFFFF" };
+	font-size: { "70px" };
+	font-width: { "bold" };
+	margin-top: { "0" };
+	margin-bottom: { "10px" };
+}
+
+templ Title(title string) {
+	<h1 class={ titleStyle() }>{ title }</h1>
+}
