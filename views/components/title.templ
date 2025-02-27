@@ -1,13 +1,25 @@
 package components
 
-css titleStyle() {
-	color: { "#FFFFFF" };
-	font-size: { "70px" };
-	font-width: { "bold" };
-	margin-top: { "0" };
-	margin-bottom: { "10px" };
+// css titleStyle() {
+// 	color: { templ.SafeCSSProperty("var(--color-white)") };
+// 	font-size: { "70px" };
+// 	font-weight: { "bold" };
+// 	margin-top: { "0" };
+// 	margin-bottom: { "10px" };
+// }
+templ Title(title string) {
+	@titleCss()
+	<h1 class="title">{ title }</h1>
 }
 
-templ Title(title string) {
-	<h1 class={ titleStyle() }>{ title }</h1>
+templ titleCss() {
+	<style>
+		.title {
+			font-weight: bold;
+			margin-bottom: 12px;
+			margin-top: 0;
+			font-size: 70px;
+			color: var(--color-white);
+		}
+	</style>
 }
