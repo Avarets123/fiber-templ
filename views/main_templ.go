@@ -32,6 +32,13 @@ func Main() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = layout.Layout(layout.LayoutProps{
+			Title:    "Найди работу мечты",
+			MetaDesc: "Сайт по поиску работы ",
+		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
 		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<main>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
