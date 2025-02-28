@@ -6,8 +6,20 @@ css HeaderCss() {
 }
 
 templ Header() {
-	<div class={ HeaderCss() }>
+	@HeaderStyles()
+	<div class="header">
 		@Menu()
 		{ children... }
 	</div>
+}
+
+templ HeaderStyles() {
+	<style>
+	.header {
+		padding: 20px 77px;
+		background: rgb(7, 5, 5);
+		text-align: center;
+
+	}
+	</style>
 }

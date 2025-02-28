@@ -33,7 +33,7 @@ func Menu() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"menu\"><div class=\"menu__logo\">Лого</div><div class=\"menu__right\"><a class=\"menu__right-link\">Войти</a></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"menu\"><div class=\"menu__logo\"><img src=\"/public/icons/bag.png\" alt=\"logo\" class=\"menu__logo-img\"><p class=\"menu__logo-text\">Моя работа</p></div><div class=\"menu__right\"><a class=\"menu__right-sign_in\" href=\"/\">Войти</a> <a class=\"menu__right-sign_in menu__right-sign_up\" href=\"/\">Зарегистрироваться</a></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -62,7 +62,7 @@ func MenuStyle() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<style>\n    .menu {\n        display: flex;\n        justify-content: space-between;\n    }\n    .menu__right {\n        display: flex;\n        gap: 20px;\n    }\n    .menu__right-link {\n        text-decoration: none;\n        color: var(--color-white);\n        font-size: 16px;\n    }\n    .menu__right-link:hover {\n        color: #9f9f9f;\n        cursor: move;\n    }\n\n    </style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<style>\n    .menu {\n        display: flex;\n        justify-content: space-between;\n    }\n    .menu__right {\n        display: flex;\n        gap: 20px;\n        align-items: center;\n    }\n    .menu__right-link {\n        text-decoration: none;\n        color: var(--color-white);\n        font-size: 16px;\n    }\n    .menu__right-link:hover {\n        color: #9f9f9f;\n        cursor: move;\n    }\n    .menu__logo {\n        display: flex;\n        align-items: center;\n        gap: 10px;\n    }\n    .menu__logo-text {\n        color: var(--color-white);\n        font-size: 20px;\n        font-weight: 600;\n    }\n    .menu__logo-img {\n        width: 28px;\n        height: 28px;\n    }\n    .menu__right-sign_in {\n        font-size: 16px;\n        font-weight: 400;\n        color: var(--color-white);\n        text-decoration: none;\n\n    }\n    .menu__right-sign_up {\n        width: 208px;\n        height: 40px;\n        border-radius: 8px;\n        padding: 14px 20px;\n        background-color: var(--color-primary);\n        font-weight: 600;\n    }\n    .menu__right-sign_up:hover {\n        background-color: #19514a;\n    }\n\n    </style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
