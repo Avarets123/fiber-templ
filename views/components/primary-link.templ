@@ -1,0 +1,26 @@
+package components
+
+templ PrimaryLink(text, href string,) {
+    @PrimaryLinkStyles()
+	<a class="primary-link" href={templ.SafeURL(href)}>{ text }</a>
+}
+
+templ PrimaryLinkStyles() {
+	<style>
+    .primary-link {
+        width: 208px;
+        border-radius: 8px;
+        padding: 14px 20px;
+        background-color: var(--color-primary);
+        font-weight: 600;
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--color-white);
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .primary-link:hover {
+        background-color: #19514a;
+    }
+    </style>
+}

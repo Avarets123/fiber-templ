@@ -1,0 +1,75 @@
+package widgets
+
+import "fiber-templ/views/components"
+
+templ PublishVacancy() {
+	@PublishVacancyStyles()
+	<div class="main__submit-form">
+		@components.Title2("Опубликовать вакансию")
+		<h3 class="publish-vacancy-h3">Введите все необходимые данные для публикации</h3>
+		<form>
+			<div class="main__submit_form">
+				@components.Input(components.InputProps{
+					Placeholder: "Должность",
+					Name:        "role",
+				})
+				@components.Input(components.InputProps{
+					Placeholder: "Название компании",
+					Name:        "companyName",
+				})
+				@components.Input(components.InputProps{
+					Placeholder: "Сфера компании",
+					Name:        "direction",
+				})
+				@components.Input(components.InputProps{
+					Placeholder: "Заработная плата",
+					Name:        "rewards",
+				})
+				@components.Input(components.InputProps{
+					Placeholder: "Расположение",
+					Name:        "location",
+				})
+				@components.Input(components.InputProps{
+					Placeholder: "Контактный email",
+					Name:        "email",
+				})
+			</div>
+			<div class="main__submit_form-btn">
+				@components.PrimaryBtn() {
+					Опубликовать вакансию
+				}
+			</div>
+		</form>
+	</div>
+}
+
+templ PublishVacancyStyles() {
+	<style>
+	.main__submit-form {
+		background-color: #3096891A;
+	}
+    .publish-vacancy-h3 {
+        font-weight: 400;
+        font-size: 16px;
+        text-align: center;
+    }
+    .main__submit_form {
+        margin-top: 60px;
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 30px 24px;
+        justify-content: center;
+
+    }
+	.main__submit_form-btn {
+		display: grid;
+		justify-content: center;
+		grid-template-columns: 300px;
+		grid-template-rows: 60px;
+		margin-top: 60px;
+		padding-bottom: 120px;
+
+
+	}
+    </style>
+}

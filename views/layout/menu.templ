@@ -1,5 +1,7 @@
 package layout
 
+import "fiber-templ/views/components"
+
 templ Menu() {
 	@MenuStyle()
 	<div class="menu">
@@ -12,7 +14,7 @@ templ Menu() {
 		</div>
 		<div class="menu__right">
 			<a class="menu__right-sign_in" href="/">Войти</a>
-			<a class="menu__right-sign_in menu__right-sign_up" href="/">Зарегистрироваться</a>
+			@components.PrimaryLink("Зарегистрироваться", "/register")
 		</div>
 	</div>
 }
@@ -58,16 +60,5 @@ templ MenuStyle() {
         text-decoration: none;
 
     }
-    .menu__right-sign_up {
-        width: 208px;
-        border-radius: 8px;
-        padding: 14px 20px;
-        background-color: var(--color-primary);
-        font-weight: 600;
-    }
-    .menu__right-sign_up:hover {
-        background-color: #19514a;
-    }
-
     </style>
 }

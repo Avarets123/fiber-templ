@@ -1,0 +1,18 @@
+package components
+
+templ Title2(text string) {
+	@Title2Styles()
+	<h2 class="title2-black">{ text }</h2>
+}
+
+templ Title2Styles() {
+	<style>
+        .title2-black {
+            font-weight: 700;
+            font-size: 50px;
+            color: var(--color-black);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+    </style>
+}

@@ -1,0 +1,27 @@
+package components
+
+templ PrimaryBtn() {
+	@PrimaryBtnStyles()
+	<button class="primary-btn">{ children... }
+</button>
+}
+
+templ PrimaryBtnStyles() {
+	<style>
+    .primary-btn {
+        border-radius: 16px;
+        padding: 14px 20px;
+        background-color: var(--color-primary);
+        font-weight: 600;
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--color-white);
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+    }
+    .primary-btn:hover {
+        background-color: #19514a;
+    }
+    </style>
+}

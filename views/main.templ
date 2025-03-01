@@ -2,6 +2,8 @@ package views
 
 import "fiber-templ/views/components"
 import "fiber-templ/views/layout"
+import "fiber-templ/views/widgets"
+
 
 templ Main() {
 	@layout.Layout(layout.LayoutProps{
@@ -9,9 +11,19 @@ templ Main() {
 		MetaDesc: "Сайт по поиску работы ",
 	})
 	<main>
+		@MainStyles()
 		@layout.Header() {
 			@components.Title("Найди работу своей мечты")
 			@components.SubTitle("Простой поиск работы")
 		}
+
+		@widgets.PublishVacancy()
+
 	</main>
+}
+
+templ MainStyles() {
+	<style>
+
+	</style>
 }
