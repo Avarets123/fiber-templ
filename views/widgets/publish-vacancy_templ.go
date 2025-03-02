@@ -43,7 +43,7 @@ func PublishVacancy() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<h3 class=\"publish-vacancy-h3\">Введите все необходимые данные для публикации</h3><form><div class=\"main__submit_form\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<h3 class=\"publish-vacancy-h3\">Введите все необходимые данные для публикации</h3><div id=\"vacancy-result\"></div><form hx-post=\"/vacancy\" hx-trigger=\"submit\" hx-target=\"#vacancy-result\" hx-swap=\"innerHTML swap:1s\"><div class=\"main__submit_form\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -144,7 +144,7 @@ func PublishVacancyStyles() templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<style>\n\t.main__submit-form {\n\t\tbackground-color: #3096891A;\n\t}\n    .publish-vacancy-h3 {\n        font-weight: 400;\n        font-size: 16px;\n        text-align: center;\n    }\n    .main__submit_form {\n        margin-top: 60px;\n        display: grid;\n        grid-template-columns: auto auto;\n        gap: 30px 24px;\n        justify-content: center;\n\n    }\n\t.main__submit_form-btn {\n\t\tdisplay: grid;\n\t\tjustify-content: center;\n\t\tgrid-template-columns: 300px;\n\t\tgrid-template-rows: 60px;\n\t\tmargin-top: 60px;\n\t\tpadding-bottom: 120px;\n\n\n\t}\n    </style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<style>\n\t.main__submit-form {\n\t\tbackground-color: #3096891A;\n\t}\n    .publish-vacancy-h3 {\n        font-weight: 400;\n        font-size: 16px;\n        text-align: center;\n    }\n    .main__submit_form {\n        margin-top: 60px;\n        display: grid;\n        grid-template-columns: auto auto;\n        gap: 30px 24px;\n        justify-content: center;\n\n    }\n\t.main__submit_form-btn {\n\t\tdisplay: grid;\n\t\tjustify-content: center;\n\t\tgrid-template-columns: 300px;\n\t\tgrid-template-rows: 60px;\n\t\tmargin-top: 60px;\n\t\tpadding-bottom: 120px;\n\t}\n    </style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

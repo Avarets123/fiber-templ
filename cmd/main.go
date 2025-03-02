@@ -3,6 +3,7 @@ package main
 import (
 	"fiber-templ/config"
 	"fiber-templ/internal/home"
+	"fiber-templ/internal/vacancy"
 	"fiber-templ/pkg/logger/zlogger"
 	"log"
 	"strings"
@@ -32,6 +33,7 @@ func main() {
 	app.Static("/public", "./public")
 
 	home.ApplyHanlder(app)
+	vacancy.ApplyHanlder(app)
 
 	zlogger.Info().Msg("App listening port: 3000")
 	err = app.Listen(":3000")

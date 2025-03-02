@@ -7,7 +7,8 @@ templ PublishVacancy() {
 	<div class="main__submit-form">
 		@components.Title2("Опубликовать вакансию")
 		<h3 class="publish-vacancy-h3">Введите все необходимые данные для публикации</h3>
-		<form>
+		<div id="vacancy-result"></div>
+		<form hx-post="/vacancy" hx-trigger="submit" hx-target="#vacancy-result" hx-swap="innerHTML swap:1s">
 			<div class="main__submit_form">
 				@components.Input(components.InputProps{
 					Placeholder: "Должность",
@@ -15,7 +16,7 @@ templ PublishVacancy() {
 				})
 				@components.Input(components.InputProps{
 					Placeholder: "Название компании",
-					Name:        "companyName",
+					Name:        "company",
 				})
 				@components.Input(components.InputProps{
 					Placeholder: "Сфера компании",
@@ -23,7 +24,7 @@ templ PublishVacancy() {
 				})
 				@components.Input(components.InputProps{
 					Placeholder: "Заработная плата",
-					Name:        "rewards",
+					Name:        "salary",
 				})
 				@components.Input(components.InputProps{
 					Placeholder: "Расположение",
@@ -68,8 +69,6 @@ templ PublishVacancyStyles() {
 		grid-template-rows: 60px;
 		margin-top: 60px;
 		padding-bottom: 120px;
-
-
 	}
     </style>
 }
