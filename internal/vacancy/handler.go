@@ -28,14 +28,23 @@ func ApplyHanlder(router fiber.Router, vacancyRepo *Repository, logger *zerolog.
 
 func (h *handler) create(c *fiber.Ctx) error {
 
-	email := c.FormValue("email")
-
 	form := VacancyCreateForm{
-		Email: email,
+		Email:     c.FormValue("email"),
+		Salary:    c.FormValue("salary"),
+		Company:   c.FormValue("company"),
+		Role:      c.FormValue("role"),
+		Location:  c.FormValue("location"),
+		Direction: c.FormValue("direction"),
 	}
 
 	if errMsg := validateVacancyCreate(&form); errMsg != "" {
 		component := components.Notification(errMsg, components.NotificationFail)
+		return templ.Render(c, component)
+	}
+
+	err := h.vacancyRepo.CreateVacancy(&form)
+	if err != nil {
+		component := components.Notification(err.Error(), components.NotificationFail)
 		return templ.Render(c, component)
 	}
 

@@ -1,6 +1,10 @@
 package vacancy
 
 import (
+	"context"
+	"time"
+
+	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/rs/zerolog"
 )
@@ -18,5 +22,26 @@ func NewRepo(db *pgxpool.Pool, logger *zerolog.Logger) *Repository {
 }
 
 func (r *Repository) CreateVacancy(vacancy *VacancyCreateForm) error {
+
+	query := `INSERT INTO vacancies (email, salary, location, company, role, direction, createdat)
+			  VALUES (@email, @salary, @location, @company, @role, @direction, @createdat)
+	`
+
+	args := pgx.NamedArgs{
+		"email":     vacancy.Email,
+		"salary":    vacancy.Salary,
+		"location":  vacancy.Location,
+		"company":   vacancy.Company,
+		"role":      vacancy.Role,
+		"direction": vacancy.Direction,
+		"createdat": time.Now(),
+	}
+
+	_, err := r.db.Exec(context.Background(), query, args)
+
+	if err != nil {
+		return err
+	}
+
 	return nil
 }

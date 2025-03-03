@@ -18,6 +18,12 @@ func NewPostgresDb(cfg *config.DatabaseCfg, logger *zerolog.Logger) *pgxpool.Poo
 		panic(err)
 	}
 
+	err = dbPool.Ping(context.Background())
+	if err != nil {
+		logger.Error().Msg(err.Error())
+		panic(err)
+	}
+
 	logger.Info().Msg("Connection to database successfully!")
 	return dbPool
 
