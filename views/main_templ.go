@@ -12,7 +12,9 @@ import "fiber-templ/views/components"
 import "fiber-templ/views/layout"
 import "fiber-templ/views/widgets"
 
-func Main() templ.Component {
+import "fiber-templ/internal/vacancy"
+
+func Main(vacancies []vacancy.Vacancy) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -78,11 +80,33 @@ func Main() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<h2 class=\"last-vacancies-h2\">Последние вакансии</h2><h5 class=\"last-vacancies-h5\">Найдите подходящую вакансию за пару минут!</h5><div class=\"vacancies-list\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		for _, vacancy := range vacancies {
+			templ_7745c5c3_Err = widgets.Vacancy(widgets.VacancyData{
+				Email:     vacancy.Email,
+				Salary:    vacancy.Salary,
+				Company:   vacancy.Company,
+				Role:      vacancy.Role,
+				Location:  vacancy.Location,
+				Direction: vacancy.Direction,
+				CreatedAt: vacancy.CreatedAt,
+			}).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
 		templ_7745c5c3_Err = widgets.PublishVacancy().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</main>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</main>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -111,7 +135,7 @@ func MainStyles() templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<style>\n\n\t</style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<style>\n\t.last-vacancies-h5 {\n\t\tfont-weight: 400;\n\t\tfont-size: 16px;\n\t\tcolor: var(--color-black);\n\t\tmargin-left: 72px;\n\t\ttext-align: center;\n\t\t\n\t}\n\t.last-vacancies-h2 {\n\t\tfont-weight: 700;\n\t\tfont-size: 50px;\n\t\tcolor: var(--color-black);\n\t\tmargin-left: 72px;\n\t\tmargin-bottom: 40px;\n\t\ttext-align: center;\n\n\n\t}\n\t.vacancies-list {\n\t\tdisplay: flex;\n\t\tflex-direction: column;\n\t\tjustify-content: center;\n\t\talign-items: center;\n\t\tmargin-left: 72px;\n\t}\n\n\t</style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

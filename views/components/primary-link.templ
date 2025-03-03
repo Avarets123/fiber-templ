@@ -1,8 +1,9 @@
 package components
 
-templ PrimaryLink(text, href string,) {
-    @PrimaryLinkStyles()
-	<a class="primary-link" href={templ.SafeURL(href)}>{ text }</a>
+templ PrimaryLink(text, href, addClass string) {
+	@PrimaryLinkStyles()
+	{{ classes := "primary-link " + addClass }}
+	<a class={ classes } href={ templ.SafeURL(href) }>{ text }</a>
 }
 
 templ PrimaryLinkStyles() {

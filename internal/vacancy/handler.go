@@ -23,6 +23,18 @@ func ApplyHanlder(router fiber.Router, vacancyRepo *Repository, logger *zerolog.
 
 	vacancyGroup := h.router.Group("/vacancy")
 	vacancyGroup.Post("/", h.create)
+	vacancyGroup.Get("/", h.getAll)
+
+}
+
+func (h *handler) getAll(c *fiber.Ctx) error {
+	vacancies, err := h.vacancyRepo.GetAll()
+	if err != nil {
+		h.logger.Error().Msg(err.Error())
+		c.SendStatus(500)
+	}
+
+	return c.JSON(vacancies)
 
 }
 

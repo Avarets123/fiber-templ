@@ -4,8 +4,9 @@ import "fiber-templ/views/components"
 import "fiber-templ/views/layout"
 import "fiber-templ/views/widgets"
 
+import "fiber-templ/internal/vacancy"
 
-templ Main() {
+templ Main(vacancies []vacancy.Vacancy) {
 	@layout.Layout(layout.LayoutProps{
 		Title:    "Найди работу мечты",
 		MetaDesc: "Сайт по поиску работы ",
@@ -16,14 +17,52 @@ templ Main() {
 			@components.Title("Найди работу своей мечты")
 			@components.SubTitle("Простой поиск работы")
 		}
-
+		<h2 class="last-vacancies-h2">Последние вакансии</h2>
+		<h5 class="last-vacancies-h5">Найдите подходящую вакансию за пару минут!</h5>
+		<div class="vacancies-list">
+			for _, vacancy := range vacancies {
+				@widgets.Vacancy(widgets.VacancyData{
+					Email:     vacancy.Email,
+					Salary:    vacancy.Salary,
+					Company:   vacancy.Company,
+					Role:      vacancy.Role,
+					Location:  vacancy.Location,
+					Direction: vacancy.Direction,
+					CreatedAt: vacancy.CreatedAt,
+				})
+			}
+		</div>
 		@widgets.PublishVacancy()
-
 	</main>
 }
 
 templ MainStyles() {
 	<style>
+	.last-vacancies-h5 {
+		font-weight: 400;
+		font-size: 16px;
+		color: var(--color-black);
+		margin-left: 72px;
+		text-align: center;
+		
+	}
+	.last-vacancies-h2 {
+		font-weight: 700;
+		font-size: 50px;
+		color: var(--color-black);
+		margin-left: 72px;
+		margin-bottom: 40px;
+		text-align: center;
+
+
+	}
+	.vacancies-list {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-left: 72px;
+	}
 
 	</style>
 }

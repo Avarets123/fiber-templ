@@ -1,0 +1,82 @@
+package widgets
+
+import "time"
+import "fiber-templ/views/components"
+
+type VacancyData struct {
+	Email,
+	Salary,
+	Company,
+	Role,
+	Location,
+	Direction string
+	CreatedAt time.Time
+}
+
+templ IconWithProperty(icon, propery string) {
+	<img
+		src={ icon }
+		alt="icon"
+		style="width: 24px;height: 24px; margin-right: 5px;"
+	/> <span
+	style="margin-right: 24px; font-size: 16px; font-weight: 600; color: #6C757D;"
+>{ propery }</span>
+}
+
+templ Vacancy(vacancy VacancyData) {
+	@VacancyStyle()
+	<div class="vacancy-wrapper">
+		<div>{ vacancy.CreatedAt.String() }</div>
+		<img class="user_logo" src="/public/icons/front.png" alt="icon"/>
+		<div class="user_desc">
+			<p class="user_desc-role">{ vacancy.Role }</p>
+			<p class="user_desc-company">{ vacancy.Company }</p>
+		</div>
+		<p>
+			@IconWithProperty("/public/icons/bi.png", vacancy.Role)
+			@IconWithProperty("/public/icons/wallet.png", vacancy.Salary)
+			@IconWithProperty("/public/icons/map.png", vacancy.Location)
+			@components.PrimaryLink("Откликнуться", "/", "primary-link-position")
+		</p>
+	</div>
+}
+
+templ VacancyStyle() {
+	<style>
+    .primary-link-position {
+        margin-left: 55%;
+    }
+    .link_fallback {
+        display: inline-block;
+    }
+    .user_desc-role {
+        font-size: 28px;
+        font-weight: 600;
+        color: var(--color-black);
+        margin-bottom: 5px;
+    }
+    .user_desc-company {
+        margin-top: 0px;
+        font-size: 16px;
+        color: var(--color-black);
+        font-weight: 400;
+    }
+    .user_desc {
+        display: inline-block;
+    }
+    .user_logo {
+        width: 40px;
+        height: 40px;
+        margin-right: 20px;
+    }
+    .vacancy-wrapper {
+        height: 251px;
+        width: 1296px;
+        border-radius: 20px;
+        background-color: #30968914;
+        padding: 40px;
+        margin-bottom: 20px;
+        
+    }
+    </style>
+}

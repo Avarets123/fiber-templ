@@ -2,6 +2,7 @@ package home
 
 import (
 	"encoding/json"
+	"fiber-templ/internal/vacancy"
 	"fiber-templ/pkg/templ"
 	"fiber-templ/views"
 
@@ -9,17 +10,19 @@ import (
 )
 
 type handler struct {
-	router fiber.Router
+	router     fiber.Router
+	repository *vacancy.Repository
 }
 type User struct {
 	Id   int
 	Name string
 }
 
-func ApplyHanlder(r fiber.Router) {
+func ApplyHanlder(r fiber.Router, repository *vacancy.Repository) {
 
 	h := &handler{
-		router: r,
+		router:     r,
+		repository: repository,
 	}
 
 	api := h.router.Group("/api")
@@ -46,7 +49,12 @@ func (h *handler) home(c *fiber.Ctx) error {
 
 	// return c.Render("page2", data)
 
-	component := views.Main()
+	vacancies, err := h.repository.GetAll()
+	if err != nil {
+		return c.SendStatus(500)
+	}
+
+	component := views.Main(vacancies)
 
 	return templ.Render(c, component)
 }

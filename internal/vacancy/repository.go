@@ -21,6 +21,17 @@ func NewRepo(db *pgxpool.Pool, logger *zerolog.Logger) *Repository {
 	}
 }
 
+func (r *Repository) GetAll() ([]Vacancy, error) {
+	query := `SELECT * FROM vacancies ORDER BY createdat`
+	rows, err := r.db.Query(context.Background(), query)
+	if err != nil {
+		return nil, err
+	}
+
+	return pgx.CollectRows(rows, pgx.RowToStructByName[Vacancy])
+
+}
+
 func (r *Repository) CreateVacancy(vacancy *VacancyCreateForm) error {
 
 	query := `INSERT INTO vacancies (email, salary, location, company, role, direction, createdat)
