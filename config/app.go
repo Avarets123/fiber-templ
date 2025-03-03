@@ -12,12 +12,12 @@ func Init() error {
 }
 
 type DatabaseCfg struct {
-	url string
+	Url string
 }
 
 func NewDbCfg() *DatabaseCfg {
 	return &DatabaseCfg{
-		url: getEnvStr("DATABASE_URL", ""),
+		Url: getEnvStr("DATABASE_URL", ""),
 	}
 }
 

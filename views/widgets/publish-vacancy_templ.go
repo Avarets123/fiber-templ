@@ -56,7 +56,7 @@ func PublishVacancy() templ.Component {
 		}
 		templ_7745c5c3_Err = components.Input(components.InputProps{
 			Placeholder: "Название компании",
-			Name:        "companyName",
+			Name:        "company",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -70,7 +70,7 @@ func PublishVacancy() templ.Component {
 		}
 		templ_7745c5c3_Err = components.Input(components.InputProps{
 			Placeholder: "Заработная плата",
-			Name:        "rewards",
+			Name:        "salary",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err

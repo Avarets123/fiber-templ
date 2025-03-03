@@ -5,19 +5,23 @@ import (
 	"fiber-templ/views/components"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/rs/zerolog"
 )
 
 type handler struct {
-	router fiber.Router
+	router      fiber.Router
+	vacancyRepo *Repository
+	logger      *zerolog.Logger
 }
 
-func ApplyHanlder(router fiber.Router) {
+func ApplyHanlder(router fiber.Router, vacancyRepo *Repository, logger *zerolog.Logger) {
 	h := &handler{
-		router: router,
+		router:      router,
+		vacancyRepo: vacancyRepo,
+		logger:      logger,
 	}
 
 	vacancyGroup := h.router.Group("/vacancy")
-
 	vacancyGroup.Post("/", h.create)
 
 }
