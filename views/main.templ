@@ -5,8 +5,9 @@ import "fiber-templ/views/layout"
 import "fiber-templ/views/widgets"
 
 import "fiber-templ/internal/vacancy"
+import "fmt"
 
-templ Main(vacancies []vacancy.Vacancy) {
+templ Main(vacancies []vacancy.Vacancy, totalPage, currentPage int) {
 	@layout.Layout(layout.LayoutProps{
 		Title:    "Найди работу мечты",
 		MetaDesc: "Сайт по поиску работы ",
@@ -32,12 +33,36 @@ templ Main(vacancies []vacancy.Vacancy) {
 				})
 			}
 		</div>
+		<div class="pages_navig_wrapper">
+			<div>
+				if currentPage != 1 {
+					<a class="pages_navig" href={ templ.SafeURL(fmt.Sprintf("/?page=%d", currentPage-1)) }>Предыдущие</a>
+				}
+			</div>
+			<div>
+				if currentPage != totalPage {
+					<a class="pages_navig" href={ templ.SafeURL(fmt.Sprintf("/?page=%d", currentPage+1)) }>Следующие</a>
+				}
+			</div>
+		</div>
 		@widgets.PublishVacancy()
 	</main>
 }
 
 templ MainStyles() {
 	<style>
+	.pages_navig_wrapper {
+		display: flex;
+		justify-content: space-between;
+		margin-left: 20%;
+		margin-right: 20%;
+	}
+	.pages_navig {
+		font-size: 20px;
+		font-weight: 500;
+		color: #6c757D;
+		text-decoration: none;
+	}
 	.last-vacancies-h5 {
 		font-weight: 400;
 		font-size: 16px;

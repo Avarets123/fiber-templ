@@ -28,7 +28,7 @@ func ApplyHanlder(router fiber.Router, vacancyRepo *Repository, logger *zerolog.
 }
 
 func (h *handler) getAll(c *fiber.Ctx) error {
-	vacancies, err := h.vacancyRepo.GetAll()
+	vacancies, err := h.vacancyRepo.GetAll(10, 5)
 	if err != nil {
 		h.logger.Error().Msg(err.Error())
 		c.SendStatus(500)

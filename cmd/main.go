@@ -41,7 +41,7 @@ func main() {
 	// App init and configuration
 	app := configureFiber(zlogger)
 	app.Static("/public", "./public")
-	home.ApplyHanlder(app, vacancyRepo)
+	home.ApplyHanlder(app, vacancyRepo, zlogger)
 	vacancy.ApplyHanlder(app, vacancyRepo, zlogger)
 
 	zlogger.Info().Msg("App listening port: 3000")

@@ -21,9 +21,22 @@ func NewRepo(db *pgxpool.Pool, logger *zerolog.Logger) *Repository {
 	}
 }
 
-func (r *Repository) GetAll() ([]Vacancy, error) {
-	query := `SELECT * FROM vacancies ORDER BY createdat`
-	rows, err := r.db.Query(context.Background(), query)
+func (r *Repository) GetCount() int {
+	query := "SELECT COUNT(*) FROM vacancies;"
+
+	allCount := 0
+
+	r.db.QueryRow(context.Background(), query).Scan(&allCount)
+	return allCount
+}
+
+func (r *Repository) GetAll(limit, offset int) ([]Vacancy, error) {
+	query := `SELECT * FROM vacancies ORDER BY createdat LIMIT @limit OFFSET @offset`
+	args := pgx.NamedArgs{
+		"limit":  limit,
+		"offset": offset,
+	}
+	rows, err := r.db.Query(context.Background(), query, args)
 	if err != nil {
 		return nil, err
 	}

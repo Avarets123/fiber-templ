@@ -13,8 +13,9 @@ import "fiber-templ/views/layout"
 import "fiber-templ/views/widgets"
 
 import "fiber-templ/internal/vacancy"
+import "fmt"
 
-func Main(vacancies []vacancy.Vacancy) templ.Component {
+func Main(vacancies []vacancy.Vacancy, totalPage, currentPage int) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -98,7 +99,45 @@ func Main(vacancies []vacancy.Vacancy) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div><div class=\"pages_navig_wrapper\"><div>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if currentPage != 1 {
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<a class=\"pages_navig\" href=\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var3 templ.SafeURL = templ.SafeURL(fmt.Sprintf("/?page=%d", currentPage-1))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var3)))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "\">Предыдущие</a>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</div><div>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if currentPage != totalPage {
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "<a class=\"pages_navig\" href=\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var4 templ.SafeURL = templ.SafeURL(fmt.Sprintf("/?page=%d", currentPage+1))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var4)))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "\">Следующие</a>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "</div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -106,7 +145,7 @@ func Main(vacancies []vacancy.Vacancy) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</main>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "</main>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -130,12 +169,12 @@ func MainStyles() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var3 == nil {
-			templ_7745c5c3_Var3 = templ.NopComponent
+		templ_7745c5c3_Var5 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var5 == nil {
+			templ_7745c5c3_Var5 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<style>\n\t.last-vacancies-h5 {\n\t\tfont-weight: 400;\n\t\tfont-size: 16px;\n\t\tcolor: var(--color-black);\n\t\tmargin-left: 72px;\n\t\ttext-align: center;\n\t\t\n\t}\n\t.last-vacancies-h2 {\n\t\tfont-weight: 700;\n\t\tfont-size: 50px;\n\t\tcolor: var(--color-black);\n\t\tmargin-left: 72px;\n\t\tmargin-bottom: 40px;\n\t\ttext-align: center;\n\n\n\t}\n\t.vacancies-list {\n\t\tdisplay: flex;\n\t\tflex-direction: column;\n\t\tjustify-content: center;\n\t\talign-items: center;\n\t\tmargin-left: 72px;\n\t}\n\n\t</style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "<style>\n\t.pages_navig_wrapper {\n\t\tdisplay: flex;\n\t\tjustify-content: space-between;\n\t\tmargin-left: 20%;\n\t\tmargin-right: 20%;\n\t}\n\t.pages_navig {\n\t\tfont-size: 20px;\n\t\tfont-weight: 500;\n\t\tcolor: #6c757D;\n\t\ttext-decoration: none;\n\t}\n\t.last-vacancies-h5 {\n\t\tfont-weight: 400;\n\t\tfont-size: 16px;\n\t\tcolor: var(--color-black);\n\t\tmargin-left: 72px;\n\t\ttext-align: center;\n\t\t\n\t}\n\t.last-vacancies-h2 {\n\t\tfont-weight: 700;\n\t\tfont-size: 50px;\n\t\tcolor: var(--color-black);\n\t\tmargin-left: 72px;\n\t\tmargin-bottom: 40px;\n\t\ttext-align: center;\n\n\n\t}\n\t.vacancies-list {\n\t\tdisplay: flex;\n\t\tflex-direction: column;\n\t\tjustify-content: center;\n\t\talign-items: center;\n\t\tmargin-left: 72px;\n\t}\n\n\t</style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

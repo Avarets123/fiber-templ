@@ -5,27 +5,31 @@ import (
 	"fiber-templ/internal/vacancy"
 	"fiber-templ/pkg/templ"
 	"fiber-templ/views"
+	"math"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/rs/zerolog"
 )
 
 type handler struct {
 	router     fiber.Router
 	repository *vacancy.Repository
+	logger     *zerolog.Logger
 }
 type User struct {
 	Id   int
 	Name string
 }
 
-func ApplyHanlder(r fiber.Router, repository *vacancy.Repository) {
+func ApplyHanlder(r fiber.Router, repository *vacancy.Repository, logger *zerolog.Logger) {
 
 	h := &handler{
 		router:     r,
 		repository: repository,
+		logger:     logger,
 	}
 
-	api := h.router.Group("/api")
+	api := h.router.Group("/")
 
 	api.Get("/", h.home)
 	api.Get("/error", h.error)
@@ -33,28 +37,24 @@ func ApplyHanlder(r fiber.Router, repository *vacancy.Repository) {
 }
 
 func (h *handler) home(c *fiber.Ctx) error {
+	page := c.QueryInt("page", 1)
+	limit := 2
 
-	// users := []User{
-	// 	{Id: 1, Name: "Vasya"},
-	// 	{Id: 2, Name: "Andrey"},
-	// 	{Id: 3, Name: "Sasha"},
-	// }
+	offset := (page - 1) * limit
 
-	// names := []string{"Alex", "Tanya"}
-
-	// data := struct {
-	// 	Names []string
-	// 	Users []User
-	// }{Names: names, Users: users}
-
-	// return c.Render("page2", data)
-
-	vacancies, err := h.repository.GetAll()
+	vacancies, err := h.repository.GetAll(limit, offset)
 	if err != nil {
+		h.logger.Error().Msg(err.Error())
 		return c.SendStatus(500)
 	}
 
-	component := views.Main(vacancies)
+	itemsCount := h.repository.GetCount()
+	totalPage := math.Ceil(float64(itemsCount) / float64(limit))
+
+	h.logger.Info().Msgf("%f", totalPage)
+	h.logger.Info().Msgf("%d", itemsCount)
+
+	component := views.Main(vacancies, int(totalPage), page)
 
 	return templ.Render(c, component)
 }
